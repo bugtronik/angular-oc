@@ -7,10 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { AppareilService } from './services/appareil.service';
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 
 const appRoutes: Routes = [
   { path: 'appareils', component: AppareilViewComponent },
+  { path: 'appareils/:id', component: SingleAppareilComponent },
   { path: 'auth', component: AuthComponent },
   { path: '', component: AppareilViewComponent }
 ];
@@ -20,14 +23,17 @@ const appRoutes: Routes = [
     AppComponent,
     AppareilComponent,
     AuthComponent,
-    AppareilViewComponent
+    AppareilViewComponent,
+    SingleAppareilComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    AppareilService
+    AppareilService,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })
