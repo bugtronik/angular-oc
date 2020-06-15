@@ -4,7 +4,11 @@
 	  <h2>Mes appareils</h2>
 	  <p>Mis à jour : {{ lastUpdate | async | date: 'short' }}</p>
       <ul>
-		  <app-appareil-view></app-appareil-view>
+		    <app-appareil  *ngFor="let appareil of appareils; let i = index"
+                 [appareilName]="appareil.name"
+                 [appareilStatus]="appareil.status"
+                 [index]="i" 
+                 [id]="appareil.id"></app-appareil>
       </ul>
       <button class="btn btn-success" 
               [disabled]="!isAuth"
