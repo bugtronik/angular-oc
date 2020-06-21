@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppareilService } from './services/appareil.service';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,7 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		
+		const counter = Observable.interval(1000);
 	}
 	
 }
