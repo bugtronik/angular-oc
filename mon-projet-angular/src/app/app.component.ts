@@ -4,6 +4,7 @@ import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ import 'rxjs/add/observable/interval';
 })
 export class AppComponent implements OnInit {
 
+	secondes: number;
+	counterSubscription: Subscription;
 
 	constructor(private authService: AuthService, private router: Router) {
 		
@@ -19,6 +22,21 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		const counter = Observable.interval(1000);
+		this.counterSubscription = counter.subscribe(
+			(value) => {
+				this.secondes = value;
+			},
+			(error) => {
+				console.log("Uh-oh, an error occured! : " + error);
+			},
+			() => {
+				console.log('Observable completed!');
+			}
+		);
+	}
+
+	ngOnDestroy() {
+		this.counterSubscription.unsubscribe();
 	}
 	
 }
